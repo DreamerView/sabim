@@ -48,7 +48,7 @@ const WellnessDiary = () => {
     };
 
     return (
-        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow">
+        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow"  data-aos="fade-up">
             <h1 className="text-center mb-4">Дневник самочувствия</h1>
             <p className="text-center mx-auto mb-5 text-muted" style={{ maxWidth: 600 }}>
                 Отмечайте самочувствие каждую неделю, чтобы отслеживать своё состояние.

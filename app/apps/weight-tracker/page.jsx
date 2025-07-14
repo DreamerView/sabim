@@ -96,7 +96,7 @@ const WeightTracker = () => {
     });
 
     return (
-        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow">
+        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow"  data-aos="fade-up">
             <h1 className="text-center mb-4">Трекер веса при беременности</h1>
             <p className="mx-auto text-center text-muted mb-5" style={{ maxWidth: 600 }}>
                 Укажите рост и вес до беременности для персонального расчёта набора веса.

@@ -19,15 +19,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="col-6 d-flex gap-4 justify-content-end align-items-center">
-                    <div className="dropdown">
-                        <button className="btn btn-outline-secondary border-0 btn-lg rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Помощники
-                        </button>
-                        <ul className="dropdown-menu mt-2 px-2 py-3 rounded-4">
-                            <li><Link className="dropdown-item rounded-4" href="/">🤰🏻 Календарь беременности</Link></li>
-                            <li><Link className="dropdown-item rounded-4" href="/planning">📅 Календарь планирования</Link></li>
-                        </ul>
-                    </div>
+                    <Link href="/apps" className="btn btn-outline-secondary border-0 btn-lg rounded-5">Помощники</Link>
                     {/* <div className="dropdown">
                         <button className="btn btn-outline-secondary border-0 btn-lg rounded-5 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Сменить язык
