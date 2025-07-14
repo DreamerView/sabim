@@ -48,7 +48,7 @@ const PlanningCalendar = () => {
 
 
     return (
-        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow">
+        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow" data-aos="fade-up">
             <h1 className="text-center mt-md-5 mb-4">Календарь планирования</h1>
             <p className="mx-auto text-center text-muted mb-5" style={{ maxWidth: 600, width: "100%" }}>
                 Укажите длительность вашего цикла и дату последней менструации, чтобы рассчитать благоприятные дни для зачатия
@@ -89,7 +89,7 @@ const PlanningCalendar = () => {
             </form>
 
             {loading && (
-                <div className="text-center mt-5 pt-5 border-top">
+                <div className="text-center mt-5 pt-5 border-top" data-aos="fade-in">
                     <div className="spinner-border m-5" style={{width: "4rem", height: "4rem",color:"#ff2e54"}} role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
@@ -97,7 +97,7 @@ const PlanningCalendar = () => {
             )}
 
             {!loading && lastPeriod && (
-                <div className="row">
+                <div className="row" data-aos="fade-up">
                     <h3 className="text-center mt-5 pt-5 mb-5 border-top">Индивидуальный прогноз</h3>
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="d-flex bg-body-tertiary border p-2 rounded-4">

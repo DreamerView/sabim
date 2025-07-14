@@ -1,9 +1,10 @@
 import Header from "@/components/Header";
+import AOSInit from "@/components/AOSInit";
 import Script from "next/script";
 
 export const metadata = {
-  title: "QazSign - Электронная цифровая подпись",
-  description: "Сервис для работы с электронной цифровой подписью",
+  title: "Sabim — Календарь беременности и планирования",
+  description: "Sabim — это удобный и бесплатный сервис для расчёта срока беременности, планирования зачатия и отслеживания женского здоровья.",
 };
 
 export default function RootLayout({ children }) {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-body-tertiary">
+        <AOSInit />
         <Header/>
         {children}
         <Script 

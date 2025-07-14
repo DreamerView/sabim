@@ -84,7 +84,7 @@ const PregnancyCalendar = () => {
     }, [date, getMonthName]);
 
     return (
-        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow">
+        <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow" data-aos="fade-up">
             <h1 className="text-center mt-md-5 mb-4">Календарь беременности</h1>
             <p className="text-center mx-auto m-0 mb-4 text-muted lh-md" style={{maxWidth:600,width:"calc(100% - 16px)",fontSize:"1rem"}}>Укажите дату первого дня последней менструации для расчёта срока беременности<br/><small className="text-center text-warning">(Это медицинский метод расчёта срока)</small></p>
             <form
@@ -113,7 +113,7 @@ const PregnancyCalendar = () => {
             </form>
 
             {loading && (
-                <div className="text-center mt-5 pt-5 border-top">
+                <div className="text-center mt-5 pt-5 border-top" data-aos="fade-in">
                     <div className="spinner-border m-5" style={{width: "4rem", height: "4rem",color:"#ff2e54"}} role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
@@ -121,7 +121,7 @@ const PregnancyCalendar = () => {
             )}
 
             {!loading && date !== 0 && (
-                <>
+                <div data-aos="fade-up">
                     <h3 className="text-center pt-5 mt-5 border-top">Параметры беременности</h3>
                     <div className="row mt-5">
                         <div className="col-xl-3 col-md-6 mb-4">
@@ -188,7 +188,7 @@ const PregnancyCalendar = () => {
                         ))}
                     </div>
 
-                </>
+                </div>
             )}
         </div>
     );
