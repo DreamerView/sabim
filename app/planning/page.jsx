@@ -13,32 +13,39 @@ const PlanningCalendar = () => {
     const [nextPeriod, setNextPeriod] = useState('');
     const [lastPeriod, setLastPeriod] = useState('');
 
-    const calculate = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const calculate = async (e) => {
         e.preventDefault();
-        if (!lastPeriodInput) return;
+        setLoading(true);
 
-        const [year, month, day] = lastPeriodInput.split("-");
-        const lastDate = new Date(year, month - 1, day);
-        const today = new Date();
+        setTimeout(() => {
+            const [year, month, day] = lastPeriodInput.split("-");
+            const lastDate = new Date(year, month - 1, day);
+            const today = new Date();
 
-        const ovulationDate = new Date(lastDate.getTime() + (cycleLengthInput / 2) * 24 * 60 * 60 * 1000);
-        const fertileWindowStart = new Date(ovulationDate.getTime() - 2 * 24 * 60 * 60 * 1000);
-        const fertileWindowEnd = new Date(ovulationDate.getTime() + 2 * 24 * 60 * 60 * 1000);
-        const nextPeriodDate = new Date(lastDate.getTime() + cycleLengthInput * 24 * 60 * 60 * 1000);
+            const ovulationDate = new Date(lastDate.getTime() + (cycleLengthInput / 2) * 24 * 60 * 60 * 1000);
+            const fertileWindowStart = new Date(ovulationDate.getTime() - 2 * 24 * 60 * 60 * 1000);
+            const fertileWindowEnd = new Date(ovulationDate.getTime() + 2 * 24 * 60 * 60 * 1000);
+            const nextPeriodDate = new Date(lastDate.getTime() + cycleLengthInput * 24 * 60 * 60 * 1000);
 
-        const daysToOvulation = Math.max(0, Math.ceil((ovulationDate - today) / (24 * 60 * 60 * 1000)));
-        const conceptionChance = daysToOvulation <= 5 ? `${100 - daysToOvulation * 15}%` : "Низкая";
+            const daysToOvulation = Math.max(0, Math.ceil((ovulationDate - today) / (24 * 60 * 60 * 1000)));
+            const conceptionChance = daysToOvulation <= 5 ? `${100 - daysToOvulation * 15}%` : "Низкая";
 
-        const formatDate = (d) => `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1).toString().padStart(2, '0')}.${d.getFullYear()}`;
+            const formatDate = (d) => `${d.getDate().toString().padStart(2, '0')}.${(d.getMonth() + 1).toString().padStart(2, '0')}.${d.getFullYear()}`;
 
-        setOvulation(formatDate(ovulationDate));
-        setFertileStart(formatDate(fertileWindowStart));
-        setFertileEnd(formatDate(fertileWindowEnd));
-        setNextPeriod(formatDate(nextPeriodDate));
-        setDaysLeft(daysToOvulation);
-        setChance(conceptionChance);
-        setLastPeriod(lastPeriodInput);
+            setOvulation(formatDate(ovulationDate));
+            setFertileStart(formatDate(fertileWindowStart));
+            setFertileEnd(formatDate(fertileWindowEnd));
+            setNextPeriod(formatDate(nextPeriodDate));
+            setDaysLeft(daysToOvulation);
+            setChance(conceptionChance);
+            setLastPeriod(lastPeriodInput);
+
+            setLoading(false);
+        }, 1000); // 1 секунда задержки
     };
+
 
     return (
         <div className="container-xl py-5 px-md-5 bg-body rounded-5 shadow">
@@ -81,7 +88,15 @@ const PlanningCalendar = () => {
                 </div>
             </form>
 
-            {lastPeriod && (
+            {loading && (
+                <div className="text-center mt-5 pt-5 border-top">
+                    <div className="spinner-border m-5" style={{width: "4rem", height: "4rem",color:"#ff2e54"}} role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            )}
+
+            {!loading && lastPeriod && (
                 <div className="row">
                     <h3 className="text-center mt-5 pt-5 mb-5 border-top">Индивидуальный прогноз</h3>
                     <div className="col-lg-4 col-md-6 mb-4">
@@ -116,7 +131,7 @@ const PlanningCalendar = () => {
 
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="d-flex bg-body-tertiary border p-2 rounded-4">
-                            <img src="/3d/maybe.png" alt="" width={56} height={56} />
+                            <img src="/3d/calendar.png" alt="" width={56} height={56} />
                             <div className="d-flex flex-column justify-content-center gap-1" style={{ marginLeft: "15px", width: "calc(100% - 72px)" }}>
                                 <h6 className="fw-bold m-0">Вероятность зачатия</h6>
                                 <p className="m-0 text-muted">{chance}</p>

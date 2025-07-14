@@ -12,6 +12,7 @@ const PregnancyCalendar = () => {
     const [weeks, setWeeks] = useState([{}]);
     const [full, setFull] = useState('not');
     const [trimester, setTrimester] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const months = [
         "января", "февраля", "марта", "апреля", "мая", "июня",
@@ -19,6 +20,15 @@ const PregnancyCalendar = () => {
     ];
 
     const getMonthName = useCallback((e) => months[e] || '', []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setTimeout(() => {
+            setDate(inputDate);
+            setLoading(false);
+        }, 1000);
+    };
 
     useEffect(() => {
         if (date !== 0) {
@@ -78,10 +88,7 @@ const PregnancyCalendar = () => {
             <h1 className="text-center mt-md-5 mb-4">Календарь беременности</h1>
             <p className="text-center mx-auto m-0 mb-4 text-muted lh-md" style={{maxWidth:600,width:"calc(100% - 16px)",fontSize:"1rem"}}>Укажите дату первого дня последней менструации для расчёта срока беременности<br/><small className="text-center text-warning">(Это медицинский метод расчёта срока)</small></p>
             <form
-                onSubmit={e => {
-                    e.preventDefault();
-                    setDate(inputDate);
-                }}
+                onSubmit={handleSubmit}
                 style={{ maxWidth: 500, width: "100%" }}
                 className="mx-auto row"
             >
@@ -105,7 +112,15 @@ const PregnancyCalendar = () => {
                 </div>
             </form>
 
-            {date !== 0 && (
+            {loading && (
+                <div className="text-center mt-5 pt-5 border-top">
+                    <div className="spinner-border m-5" style={{width: "4rem", height: "4rem",color:"#ff2e54"}} role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            )}
+
+            {!loading && date !== 0 && (
                 <>
                     <h3 className="text-center pt-5 mt-5 border-top">Параметры беременности</h3>
                     <div className="row mt-5">
